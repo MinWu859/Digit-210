@@ -2,7 +2,7 @@
 # Our resource: The Python os module + a handy code example:
 #  https://www.geeksforgeeks.org/how-to-read-multiple-text-files-from-folder-in-python/
 import spacy
-nlp = spacy.cli.download("en_core_web_md")
+# nlp = spacy.cli.download("en_core_web_md")
 nlp = spacy.load('en_core_web_md')
 # ABOUT WHAT SPACY SHOULD LOAD: Some tutorials direct us to en_core_web_md
 # There are _sm, _md, and _lg models built into spaCy. Each takes up more space than the others, but
@@ -74,7 +74,9 @@ def readTextFiles(filepath):
                         highSimilarityDict[token]=wordOfInterest.similarity(token)
                         # print(token.text, "about this much similar to", wordOfInterest, ": ", wordOfInterest.similarity(token))
     print("This is a dictionary of words most similar to the word " + wordOfInterest.text + " in this file.")
-    print(highSimilarityDict)
+    # print(highSimilarityDict)
+    sorted_highSimilarityDict = dict(sorted(highSimilarityDict.items(), key=lambda x: x[1], reverse=True))
+    print(sorted_highSimilarityDict)
 
 
 for file in os.listdir(CollPath):
@@ -82,3 +84,6 @@ for file in os.listdir(CollPath):
         filepath = f"{CollPath}/{file}"
         print(filepath)
         readTextFiles(filepath)
+
+
+
